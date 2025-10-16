@@ -1,0 +1,58 @@
+name: Weekly CIDR Update
+
+on:
+  schedule:
+    - cron: "0 0 * * 0"  # every Sunday at midnight UTC
+  workflow_dispatch:
+
+jobs:
+  update-cidrs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare folders
+        run: |
+          mkdir -p Cloudflare Meta
+
+      - name: Download Cloudflare IPv4 list
+        run: |
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://www.cloudflare.com/ips-v4/" -o Cloudflare/ipv4.txt
+          echo "Cloudflare file size: $(stat -c%s Cloudflare/ipv4.txt) bytes"
+
+      - name: Download Cloudflare IPv6 list
+        run: |
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://www.cloudflare.com/ips-v6/" -o Cloudflare/ipv6.txt
+          echo "Cloudflare file size: $(stat -c%s Cloudflare/ipv6.txt) bytes"
+
+      - name: Download Meta (Facebook) Combined GeoFeed
+        run: |
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://www.facebook.com/peering/geofeed" -o Meta/geofeed.csv
+          echo "Meta file size: $(stat -c%s Meta/geofeed.csv) bytes"
+
+      - name: Detect and commit individual changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          CHANGED=0
+
+          for path in Cloudflare/ipv4.txt Cloudflare/ipv6.txt Meta/geofeed.csv; do
+            # Add the file regardless — git will handle new files
+            git add "$path"
+
+            # Check if this file has changes or is new
+            if ! git diff --cached --quiet -- "$path"; then
+              echo "Detected change or new file: $path"
+              git commit -m "Update $path - $(date -u +"%Y-%m-%d")"
+              CHANGED=1
+            fi
+          done
+
+          if [ "$CHANGED" -eq 1 ]; then
+            git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
+          else
+            echo "No changes found."
+          fi
