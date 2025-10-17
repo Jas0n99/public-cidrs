@@ -15,7 +15,7 @@ jobs:
 
       - name: Prepare folders
         run: |
-          mkdir -p Cloudflare Meta
+          mkdir -p Cloudflare Meta OpenAI Mistral Perplexity
 
       - name: Download Cloudflare IPv4 list
         run: |
@@ -32,6 +32,39 @@ jobs:
           curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://www.facebook.com/peering/geofeed" -o Meta/geofeed.csv
           echo "Meta file size: $(stat -c%s Meta/geofeed.csv) bytes"
 
+      - name: Download OpenAI lists
+        run: |
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://openai.com/gptbot.json" -o OpenAI/gptbot.json
+          echo "OpenAI GPTBot file size: $(stat -c%s OpenAI/gptbot.json) bytes"
+
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://openai.com/searchbot.json" -o OpenAI/searchbot.json
+          echo "OpenAI SearchBot file size: $(stat -c%s OpenAI/searchbot.json) bytes"
+
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://openai.com/chatgpt-user.json" -o OpenAI/chatgpt-user.json
+          echo "OpenAI ChatGPT-User file size: $(stat -c%s OpenAI/chatgpt-user.json) bytes"
+
+          jq -r '.prefixes[].ipv4Prefix' OpenAI/gptbot.json > OpenAI/gptbot.txt
+          jq -r '.prefixes[].ipv4Prefix' OpenAI/chatgpt-user.json > OpenAI/chatgpt-user.txt
+          jq -r '.prefixes[].ipv4Prefix' OpenAI/searchbot.json > OpenAI/searchbot.txt
+
+      - name: Download Mistral lists
+        run: |
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://mistral.ai/mistralai-user-ips.json" -o Mistral/mistralai-user-ips.json
+          echo "Mistral-User file size: $(stat -c%s Mistral/mistralai-user-ips.json) bytes"
+
+          jq -r '.prefixes[].ipv4Prefix' Mistral/mistralai-user-ips.json > Mistral/mistralai-user-ips.txt
+
+      - name: Download Perplexity lists
+        run: |
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://www.perplexity.ai/perplexitybot.json" -o Perplexity/perplexitybot.json
+          echo "PerplexityBot file size: $(stat -c%s Perplexity/perplexitybot.json) bytes"
+
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://www.perplexity.ai/perplexity-user.json" -o Perplexity/perplexity-user.json
+          echo "Perplexity-User file size: $(stat -c%s Perplexity/perplexity-user.json) bytes"
+
+          jq -r '.prefixes[].ipv4Prefix' Perplexity/perplexitybot.json > Perplexity/perplexitybot.txt
+          jq -r '.prefixes[].ipv4Prefix' Perplexity/perplexity-user.json > Perplexity/perplexity-user.txt
+
       - name: Detect and commit individual changes
         run: |
           git config user.name "github-actions[bot]"
@@ -39,7 +72,7 @@ jobs:
 
           CHANGED=0
 
-          for path in Cloudflare/ipv4.txt Cloudflare/ipv6.txt Meta/geofeed.csv; do
+          for path in Cloudflare/ipv4.txt Cloudflare/ipv6.txt Meta/geofeed.csv OpenAI/gptbot.txt OpenAI/chatgpt-user.txt OpenAI/searchbot.txt Mistral/mistralai-user-ips.txt Perplexity/perplexitybot.txt Perplexity/perplexity-user.txt; do
             # Add the file regardless — git will handle new files
             git add "$path"
 
