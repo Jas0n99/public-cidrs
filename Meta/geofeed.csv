@@ -39,7 +39,7 @@
 # Mateo County, California, and each party irrevocably submits to the
 # jurisdiction and venue of such courts.
 # 
-# Publication date: Fri Oct 17 2025
+# Publication date: Sat Oct 18 2025
 31.13.78.0/24,NZ,,Auckland,
 2a03:2880:f061::/48,NZ,,Auckland,
 2a03:2880:f161::/48,NZ,,Auckland,
@@ -296,12 +296,12 @@
 2a03:2880:f162::/48,US,US-TX,Houston,
 2a03:2880:f065::/48,US,US-TX,Houston,
 2a03:2880:f262::/48,US,US-TX,Houston,
-163.70.140.0/24,IN,IN-TG,Hyderabad,
-2a03:2880:f09e::/48,IN,IN-TG,Hyderabad,
-2a03:2880:f185::/48,IN,IN-TG,Hyderabad,
-2a03:2880:f285::/48,IN,IN-TG,Hyderabad,
-57.144.122.0/23,IN,IN-TG,Hyderabad,
-2a03:2880:f33d::/48,IN,IN-TG,Hyderabad,
+163.70.140.0/24,IN,,Hyderabad,
+2a03:2880:f09e::/48,IN,,Hyderabad,
+2a03:2880:f185::/48,IN,,Hyderabad,
+2a03:2880:f285::/48,IN,,Hyderabad,
+57.144.122.0/23,IN,,Hyderabad,
+2a03:2880:f33d::/48,IN,,Hyderabad,
 69.171.251.0/24,US,US-VA,Ashburn,
 69.171.252.0/24,US,US-VA,Ashburn,
 69.171.246.0/24,US,US-VA,Ashburn,
@@ -400,6 +400,8 @@
 2a03:2880:f038::/48,NG,,Lagos,
 2a03:2880:f138::/48,NG,,Lagos,
 2a03:2880:f238::/48,NG,,Lagos,
+57.144.38.0/23,NG,,Lagos,
+2a03:2880:f310::/48,NG,,Lagos,
 157.240.23.0/24,IN,IN-TN,Chennai,
 2a03:2880:f037::/48,IN,IN-TN,Chennai,
 2a03:2880:f137::/48,IN,IN-TN,Chennai,
