@@ -39,7 +39,7 @@
 # Mateo County, California, and each party irrevocably submits to the
 # jurisdiction and venue of such courts.
 # 
-# Publication date: Sat Oct 18 2025
+# Publication date: Sat Oct 25 2025
 31.13.78.0/24,NZ,,Auckland,
 2a03:2880:f061::/48,NZ,,Auckland,
 2a03:2880:f161::/48,NZ,,Auckland,
@@ -166,6 +166,8 @@
 163.70.145.0/24,IN,,Noida,
 57.144.146.0/23,IN,,Noida,
 2a03:2880:f349::/48,IN,,Noida,
+57.144.40.0/23,IN,,Noida,
+2a03:2880:f311::/48,IN,,Noida,
 57.144.104.0/23,US,US-CO,Denver,
 2a03:2880:f32b::/48,US,US-CO,Denver,
 57.144.172.0/23,US,US-MI,Southfield,
@@ -357,6 +359,10 @@
 2a03:2880:f20d::/48,US,US-CA,Los Angeles,
 2a03:2880:f00d::/48,US,US-CA,Los Angeles,
 157.240.11.0/24,US,US-CA,Los Angeles,
+57.141.14.0/24,US,US-CA,Los Angeles,
+57.141.15.0/24,US,US-CA,Los Angeles,
+2a03:2880:f80e::/48,US,US-CA,Los Angeles,
+2a03:2880:f80f::/48,US,US-CA,Los Angeles,
 57.144.202.0/23,US,US-CA,Los Angeles,
 2a03:2880:f365::/48,US,US-CA,Los Angeles,
 173.252.110.0/24,US,US-OH,New Albany,
