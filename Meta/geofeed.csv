@@ -39,7 +39,7 @@
 # Mateo County, California, and each party irrevocably submits to the
 # jurisdiction and venue of such courts.
 # 
-# Publication date: Sat Oct 25 2025
+# Publication date: Sat Nov 01 2025
 31.13.78.0/24,NZ,,Auckland,
 2a03:2880:f061::/48,NZ,,Auckland,
 2a03:2880:f161::/48,NZ,,Auckland,
@@ -108,6 +108,8 @@
 2a03:2880:f358::/48,IN,IN-MH,Mumbai,
 57.144.242.0/23,IN,IN-MH,Mumbai,
 2a03:2880:f379::/48,IN,IN-MH,Mumbai,
+57.144.42.0/23,IN,IN-MH,Mumbai,
+2a03:2880:f312::/48,IN,IN-MH,Mumbai,
 157.240.245.0/24,US,US-MA,Boston,
 2a03:2880:f07e::/48,US,US-MA,Boston,
 2a03:2880:f172::/48,US,US-MA,Boston,
@@ -589,12 +591,10 @@
 2a03:2880:70ff::/48,US,US-VA,Sandston,
 173.252.113.0/24,US,US-IN,Jeffersonville,
 2a03:2880:62ff::/48,US,US-IN,Jeffersonville,
+173.252.98.0/24,US,US-MN,Rosemount,
+2a03:2880:63ff::/48,US,US-MN,Rosemount,
 173.252.107.0/24,US,US-VA,Sandston,
 2a03:2880:22ff::/48,US,US-VA,Sandston,
-157.240.204.0/24,CL,,Huechuraba,
-2a03:2880:f147::/48,CL,,Huechuraba,
-2a03:2880:f047::/48,CL,,Huechuraba,
-2a03:2880:f247::/48,CL,,Huechuraba,
 57.144.246.0/23,CL,,Huechuraba,
 2a03:2880:f37b::/48,CL,,Huechuraba,
 173.252.105.0/24,US,US-UT,West Jordan,
