@@ -32,6 +32,11 @@ jobs:
           curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://www.facebook.com/peering/geofeed" -o Meta/geofeed.csv
           echo "Meta file size: $(stat -c%s Meta/geofeed.csv) bytes"
 
+          grep -E '^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' Meta/geofeed.csv | awk -F , '{print$1}' | sort -V > Meta/ipv4.txt
+          grep -E '^([0-9a-fA-F]{1,4}:){2,}' Meta/geofeed.csv | awk -F, '{print $1}' | sort -V > Meta/ipv6.txt
+
+          rm -f Meta/geofeed.csv
+
       - name: Download OpenAI lists
         run: |
           curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://openai.com/gptbot.json" -o OpenAI/gptbot.json
