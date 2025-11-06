@@ -15,7 +15,7 @@ jobs:
 
       - name: Prepare folders
         run: |
-          mkdir -p Cloudflare Meta OpenAI Mistral Perplexity
+          mkdir -p Cloudflare Meta OpenAI Mistral Perplexity CommonCrawl
 
       - name: Download Cloudflare IPv4 list
         run: |
@@ -76,12 +76,22 @@ jobs:
 
           rm -f Perplexity/perplexitybot.json Perplexity/perplexity-user.json
 
+      - name: Download Common Crawl lists
+        run: |
+          curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://index.commoncrawl.org/ccbot.json" -o CommonCrawl/ccbot.json
+          echo "CommonCrawl file size: $(stat -c%s CommonCrawl/ccbot.json) bytes"
+
+          jq -r '.prefixes[].ipv4Prefix' CommonCrawl/ccbot.json > CommonCrawl/ipv4.txt
+          jq -r '.prefixes[].ipv6Prefix' CommonCrawl/ccbot.json > CommonCrawl/ipv6.txt
+
+          rm -f CommonCrawl/ccbot.json
+
       - name: Detect and commit individual changes
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add Cloudflare/* Meta/* OpenAI/* Mistral/* Perplexity/*
+          git add Cloudflare/* Meta/* OpenAI/* Mistral/* Perplexity/* CommonCrawl/*
 
           # Check if there are any staged changes
           if ! git diff --cached --quiet -- "$path"; then
