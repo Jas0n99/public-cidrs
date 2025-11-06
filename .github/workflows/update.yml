@@ -48,9 +48,9 @@ jobs:
           curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://openai.com/chatgpt-user.json" -o OpenAI/chatgpt-user.json
           echo "OpenAI ChatGPT-User file size: $(stat -c%s OpenAI/chatgpt-user.json) bytes"
 
-          jq -r '.prefixes[].ipv4Prefix' OpenAI/gptbot.json > OpenAI/gptbot.txt
-          jq -r '.prefixes[].ipv4Prefix' OpenAI/chatgpt-user.json > OpenAI/chatgpt-user.txt
-          jq -r '.prefixes[].ipv4Prefix' OpenAI/searchbot.json > OpenAI/searchbot.txt
+          jq -r '.prefixes[] | select(.ipv4Prefix != null) | .ipv4Prefix' OpenAI/gptbot.json > OpenAI/gptbot.txt
+          jq -r '.prefixes[] | select(.ipv4Prefix != null) | .ipv4Prefix' OpenAI/chatgpt-user.json > OpenAI/chatgpt-user.txt
+          jq -r '.prefixes[] | select(.ipv4Prefix != null) | .ipv4Prefix' OpenAI/searchbot.json > OpenAI/searchbot.txt
 
           rm -f OpenAI/gptbot.json OpenAI/chatgpt-user.json OpenAI/searchbot.json
 
@@ -59,7 +59,7 @@ jobs:
           curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://mistral.ai/mistralai-user-ips.json" -o Mistral/mistralai-user-ips.json
           echo "Mistral-User file size: $(stat -c%s Mistral/mistralai-user-ips.json) bytes"
 
-          jq -r '.prefixes[].ipv4Prefix' Mistral/mistralai-user-ips.json > Mistral/mistralai-user-ips.txt
+          jq -r '.prefixes[] | select(.ipv4Prefix != null) | .ipv4Prefix' Mistral/mistralai-user-ips.json > Mistral/mistralai-user-ips.txt
 
           rm -f Mistral/mistralai-user-ips.json
 
@@ -71,8 +71,8 @@ jobs:
           curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://www.perplexity.ai/perplexity-user.json" -o Perplexity/perplexity-user.json
           echo "Perplexity-User file size: $(stat -c%s Perplexity/perplexity-user.json) bytes"
 
-          jq -r '.prefixes[].ipv4Prefix' Perplexity/perplexitybot.json > Perplexity/perplexitybot.txt
-          jq -r '.prefixes[].ipv4Prefix' Perplexity/perplexity-user.json > Perplexity/perplexity-user.txt
+          jq -r '.prefixes[] | select(.ipv4Prefix != null) | .ipv4Prefix' Perplexity/perplexitybot.json > Perplexity/perplexitybot.txt
+          jq -r '.prefixes[] | select(.ipv4Prefix != null) | .ipv4Prefix' Perplexity/perplexity-user.json > Perplexity/perplexity-user.txt
 
           rm -f Perplexity/perplexitybot.json Perplexity/perplexity-user.json
 
@@ -81,8 +81,8 @@ jobs:
           curl -sSL -L --compressed -A "public-cidrs-bot/1.0" "https://index.commoncrawl.org/ccbot.json" -o CommonCrawl/ccbot.json
           echo "CommonCrawl file size: $(stat -c%s CommonCrawl/ccbot.json) bytes"
 
-          jq -r '.prefixes[].ipv4Prefix' CommonCrawl/ccbot.json > CommonCrawl/ipv4.txt
-          jq -r '.prefixes[].ipv6Prefix' CommonCrawl/ccbot.json > CommonCrawl/ipv6.txt
+          jq -r '.prefixes[] | select(.ipv4Prefix != null) | .ipv4Prefix' CommonCrawl/ccbot.json > CommonCrawl/ipv4.txt
+          jq -r '.prefixes[] | select(.ipv6Prefix != null) | .ipv6Prefix' CommonCrawl/ccbot.json > CommonCrawl/ipv6.txt
 
           rm -f CommonCrawl/ccbot.json
 
