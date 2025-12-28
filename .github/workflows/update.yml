@@ -94,7 +94,7 @@ jobs:
           git add Cloudflare/* Meta/* OpenAI/* Mistral/* Perplexity/* CommonCrawl/*
 
           # Check if there are any staged changes
-          if ! git diff --cached --quiet -- "$path"; then
+          if ! git diff --cached --quiet; then
             echo "Detected changes - committing."
             git commit -m "Update data files - $(date -u +"%Y-%m-%d")"
             git push https://$GITHUB_ACTOR:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref }}
